@@ -1,7 +1,7 @@
 
 
 
-Sample Script to Create Draft of Gmail, By Gas
+Sample Script to automate routine-works, and to save time, By Gas
 
 This script is almost same as the code on the Qiita's article as bellow;
  "GoogleAppsScriptでGmailの下書きを、より簡単に作成する方法"
@@ -22,6 +22,12 @@ https://stackoverflow.com/questions/48482260/getting-this-app-isnt-verified-for-
 
 cf. "OAuth Client Verification" , official guide
 https://developers.google.com/apps-script/guides/client-verification
+
+
+How To Write <Slack User ID, e.g. E2>at Row'E'on the SpreadSheet
+
+=VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
+
 
 If you face trouble...
 plz give me comments!
