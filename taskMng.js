@@ -58,7 +58,7 @@ Click "Run" button, after that "onMyEdit", or "remind".
 
 function onMyEdit() {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName('Jan');
+    const sheet = ss.getSheetByName('<SheetName e.g. sheet1>');
     const sheetUrl = ss.getUrl();
     const cell = sheet.getActiveCell().getA1Notation();
     const columnNameInAlphabet = cell.replace(/\d+/,'');
@@ -124,7 +124,7 @@ function remind() {
     var OFFSET_COLUMN = 0;
     
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName('Jan');
+    const sheet = ss.getSheetByName('<SheetName e.g. sheet1>');
     //URL
     var sheetUrl = ss.getUrl();
     var dataRange = sheet.getDataRange();
@@ -201,7 +201,6 @@ function writeReminders(taskNumber, taskCategory, taskName, slackId, dueDateTime
 
 function sendMessages(contents) {
     // Incoming Webhooks
-    //var webHooktUrl = "https://hooks.slack.com/services/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";
     var webHooktUrl = "https://hooks.slack.com/services/xxxxxxxxxxxxxxxx";
     
     var options = {
