@@ -12,11 +12,6 @@ https://api.slack.com/#read_the_docs
 SlackのIncoming Webhooksでメンションを飛ばす方法
 https://qiita.com/ryo-yamaoka/items/7677ee4486cf395ce9bc
 
-		
-No.	: 0
-Task Category : 1
-Task Name ,Assignee, Slack User ID, Due Date,
-Status : 6
 */
 
 var OFFSET_ROW = 2;
