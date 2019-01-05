@@ -1,5 +1,8 @@
 /*
-sources;
+
+
+*----------------- sources --------------------
+
 Googleスプレッドシートをハック！Apps Scriptを使ったToDoリストの実装
 https://blog.btrax.com/jp/apps_script/
 
@@ -26,10 +29,14 @@ https://qiita.com/ryo-yamaoka/items/7677ee4486cf395ce9bc
 Write Only at the cell of Slack User ID one by one bellow;
 =VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
 
-*--------------------------------------------------------------------
+
+*------------------ Let's run this script! ------------------------------
+
+Click "Run" button, after that "main".
 
 
 */
+
 
 var OFFSET_ROW = 2;
 var OFFSET_COLUMN = 0;
