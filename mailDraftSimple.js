@@ -5,7 +5,7 @@ https://qiita.com/mkiyota/items/32d0fb2818bddf0d2e05
 
 */
 
-function myFunction() {
+function main() {
   
    
   var mailTo = "to@example.com" 

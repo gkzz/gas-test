@@ -1,9 +1,11 @@
 /* 
-source: GoogleAppsScriptでGmailの下書きを、より簡単に作成する方法
-https://qiita.com/mkiyota/items/32d0fb2818bddf0d2e05 
+sources;
+"GoogleAppsScriptでGmailの下書きを、より簡単に作成する方法"
+https://qiita.com/mkiyota/items/32d0fb2818bddf0d2e05
+
 */
 
-function myFunction() {
+function main() {
   
   var mailTo = "to@example.com" 
   // var mailCc = "cc@example.com" 
