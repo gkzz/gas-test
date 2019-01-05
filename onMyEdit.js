@@ -57,7 +57,6 @@ function onMyEdit() {
     const sheet = ss.getSheetByName('Jan');
     const sheetUrl = ss.getUrl();
     const cell = sheet.getActiveCell().getA1Notation();
-    //[19-01-04 11:18:47:870 JST] G4
     const columnNameInAlphabet = cell.replace(/\d+/,'');
     Logger.log(columnNameInAlphabet);
     if ('H' == columnNameInAlphabet) {

@@ -21,13 +21,19 @@ onMyEdit.js + remind.js
 3) Label 2nd sheet "<SheetName, e.g. id>" and to copy and to paste it contents of "csv/taskMng_id_container_bound.csv". 
 4) Create container-bound-script by clicking "Tool" button and "Script editor" button.
 5) Copy and paste your script editor  from all contents of this js-file.
-6) Save and get permissions.
+6) Import Libraries of "moment.js" and "slack app".
+   6-1) key: library/key.txt
+7) Save and get permissions.
 
-+α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>" 
 
-Write Only at the cell of Slack User ID one by one bellow;
++α) How to change automatically <Slack User Name> and <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>"
+Write Only at the cells one by one bellow;
 
-=VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
+<Slack User Name>
+=VLOOKUP(D2,<2nd SheetName>!$A$2:$C$100,2,FALSE)
+
+<Slack User ID> 
+=VLOOKUP(D2,<2nd SheetName>!$A$2:$C$100,3,FALSE)
 
 
 ## If Your Script Doesn't Work Well, 
