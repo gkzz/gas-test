@@ -6,10 +6,10 @@
 Draft is created regularary, NOT sent to someone.
 
 ### onMyEdit.js
-Bot post contents of updated row to slack, when status is updated,
+Bot post contents of updated row to slack, when status is updated.
 
 ### remind.js
-Bot post past-due tasks, and the assignees to slack regularly
+Bot post past-due tasks, and the assignees to slack regularly.
 
 #### To Do Before Run onMyEdit.js and remind.js
 
