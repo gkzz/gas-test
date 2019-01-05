@@ -1,7 +1,5 @@
 
-# Sample Script To Manage Tasks, Reminders (Half Automatically), And To Save Time
-
-Automate Routine Works, And To Save Time, By GAS
+# Sample Script To Manage Tasks, Reminders (Half Automatically), And To Save Time, By GAS
 
 ## Script's Line Up
 ### mailDraft.js
