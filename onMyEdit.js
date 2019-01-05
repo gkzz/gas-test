@@ -9,6 +9,22 @@ https://tonari-it.com/gas-moment-js-moment/
 SlackのIncoming Webhooksでメンションを飛ばす方法
 https://qiita.com/ryo-yamaoka/items/7677ee4486cf395ce9bc
 
+
+*----------------- To Do Before Run This Script --------------------
+
+1) Create spreadsheet and to 2 sheets.
+2) Label 1st sheet "<SheetName, e.g. Sheet1>" and to copy and to paste it contents of "csv/onMyEdit_sheet1_container_bound.csv". 
+3) Label 2nd sheet "<SheetName, e.g. id>" and to copy and to paste it contents of "csv/onMyEdit_id_container_bound.csv". 
+4) Create container-bound-script by clicking "Tool" button and "Script editor" button.
+5) Copy and paste your script editor  from all contents of this js-file.
+6) Save and get permissions.
+
++α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>"
+Write Only at the cell of Slack User ID one by one bellow;
+=VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
+
+*--------------------------------------------------------------------
+
 */
 
 var OFFSET_ROW = 2;
