@@ -1,6 +1,4 @@
 /*
-
-
 *----------------- sources --------------------
 
 Googleスプレッドシートをハック！Apps Scriptを使ったToDoリストの実装
@@ -9,6 +7,9 @@ https://blog.btrax.com/jp/apps_script/
 日付＆時刻の便利ライブラリ「Moment.js」をGoogle Apps Scriptで使う方法
 https://tonari-it.com/gas-moment-js-moment/
 
+slack API Docs
+https://api.slack.com/#read_the_docs
+
 SlackのIncoming Webhooksでメンションを飛ばす方法
 https://qiita.com/ryo-yamaoka/items/7677ee4486cf395ce9bc
 
@@ -16,42 +17,61 @@ https://qiita.com/ryo-yamaoka/items/7677ee4486cf395ce9bc
 *----------------- To Do Before Run This Script --------------------
 
 1) Create spreadsheet and to 2 sheets.
-2) Label 1st sheet "<SheetName, e.g. Sheet1>" and to copy and to paste it contents of "csv/onMyEdit_sheet1_container_bound.csv". 
-3) Label 2nd sheet "<SheetName, e.g. id>" and to copy and to paste it contents of "csv/onMyEdit_id_container_bound.csv". 
+2) Label 1st sheet "<SheetName, e.g. Sheet1>" and to copy and to paste it contents of "csv/taskMng_sheet1_container_bound.csv". 
+3) Label 2nd sheet "<SheetName, e.g. id>" and to copy and to paste it contents of "csv/taskMng_id_container_bound.csv". 
 4) Create container-bound-script by clicking "Tool" button and "Script editor" button.
 5) Copy and paste your script editor  from all contents of this js-file.
 6) Save and get permissions.
 
-+α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>"
-Write Only at the cell of Slack User ID one by one bellow;
-=VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
++α) How to change automatically <Slack User Name> and <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>"
+Write Only at the cells one by one bellow;
+
+<Slack User Name>
+=VLOOKUP(D2,<2nd SheetName>!$A$2:$C$100,2,FALSE)
+
+<Slack User ID> 
+=VLOOKUP(D2,<2nd SheetName>!$A$2:$C$100,3,FALSE)
+
 
 *------------------ Let's run this script! ------------------------------
 
-Click "Run" button, after that "main".
+Click "Run" button, after that "onMyEdit".
 
 
 */
 
 
-var OFFSET_ROW = 2;
-var OFFSET_COLUMN = 0;
 
+/*
+*----------------- function onMyEdit() ----------------------------
+*
+*  onMyEdit() 
+*             >> round() 
+*                       >> writeMessages() 
+*                                         >> sendMessages()
+*
+*/
 
-function main() {
+function onMyEdit() {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName('<SheetName, e.g. Sheet1>');
+    const sheet = ss.getSheetByName('Jan');
     const sheetUrl = ss.getUrl();
     const cell = sheet.getActiveCell().getA1Notation();
     //[19-01-04 11:18:47:870 JST] G4
     const columnNameInAlphabet = cell.replace(/\d+/,'');
-    if ('G' == columnNameInAlphabet) {
-        var editedTask = sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues()[0];
+    Logger.log(columnNameInAlphabet);
+    if ('H' == columnNameInAlphabet) {
+        const rowNameInNumber = sheet.getActiveCell().getRow();
+        var RowNumberOfUpdatedStatus = round(rowNameInNumber) - 3;
+        Logger.log(RowNumberOfUpdatedStatus);
+        var editedTask = sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn())
+        .getValues()[RowNumberOfUpdatedStatus];
+        Logger.log(editedTask);
         /*
         * No.	: 0
         * Task Category : 1
         * Task Name ,Assignee, Slack User ID, Due Date,
-        * Status : 6
+        * Status : 7
         */
         //No.
         var taskNumber = round(editedTask[0]);
@@ -60,19 +80,19 @@ function main() {
         //Task Name, タスク名
         var taskName = editedTask[2];
         //Slack User ID of Assignee, 担当者のslackのプロフィールページからコピペするUser ID
-        var slackId = editedTask[4]; 
+        var slackId = editedTask[5]; 
         //Due Date, 締切
-        var dueDateTime = Moment.moment(editedTask[5]).format('YYYY年MM月DD日  hh時');
+        var dueDateTime = Moment.moment(editedTask[6]).format('YYYY年MM月DD日  hh時');
         //Status, done, doing, or todo???
-        var status = editedTask[6];  
+        var status = editedTask[7];  
         var contents = writeMessages(taskNumber, taskCategory, taskName, slackId, dueDateTime, status, sheetUrl);
-        sendMessage(contents);
+        sendMessages(contents);
     }
 }
 
 
 function writeMessages(taskNumber, taskCategory, taskName, slackId, dueDateTime, status, sheetUrl) {
-    var messages = "###Update is complete. 更新完了### \n";
+    var messages = "###Update is complete.  更新完了### \n";
     messages += "【Assignee】 <@" + slackId + ">\n";
     messages += "【No.】" + taskNumber +"\n";
     messages += "【Task Category】" + taskCategory +"\n";
@@ -84,9 +104,10 @@ function writeMessages(taskNumber, taskCategory, taskName, slackId, dueDateTime,
 }
 
 
-function sendMessage(contents) {
-    //Incoming Webhooks
-    var webHooktUrl = "https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxx";
+function sendMessages(contents) {
+    // Incoming Webhooks
+    //var webHooktUrl = "https://hooks.slack.com/services/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";
+    var webHooktUrl = "https://hooks.slack.com/services/xxxxxxxxxxxxxxxx";
     
     var options = {
         "method" : "POST",

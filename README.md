@@ -11,11 +11,14 @@ Bot post contents of updated row to slack, when status is updated.
 ### remind.js
 Bot post past-due tasks, and the assignees to slack regularly.
 
-#### To Do Before Run onMyEdit.js and remind.js
+### taskMng.js
+onMyEdit.js + remind.js
+
+#### To Do Before Run onMyEdit.js, remind.js, taskMng.js
 
 1) Create spreadsheet and to 2 sheets.
-2) Label 1st sheet "<SheetName, e.g. Sheet1>" and to copy and to paste it contents of "csv/<onMyEdit/remind>_sheet1_container_bound.csv". 
-3) Label 2nd sheet "<SheetName, e.g. id>" and to copy and to paste it contents of "csv/<onMyEdit/remind>_id_container_bound.csv". 
+2) Label 1st sheet "<SheetName, e.g. Sheet1>" and to copy and to paste it contents of "csv/taskMng_sheet1_container_bound.csv". 
+3) Label 2nd sheet "<SheetName, e.g. id>" and to copy and to paste it contents of "csv/taskMng_id_container_bound.csv". 
 4) Create container-bound-script by clicking "Tool" button and "Script editor" button.
 5) Copy and paste your script editor  from all contents of this js-file.
 6) Save and get permissions.

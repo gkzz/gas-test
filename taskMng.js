@@ -35,10 +35,77 @@ Write Only at the cells one by one bellow;
 
 *------------------ Let's run this script! ------------------------------
 
-Click "Run" button, after that "remind".
+Click "Run" button, after that "onMyEdit", or "remind".
 
 
 */
+
+
+
+
+
+/*
+*----------------- function onMyEdit() ----------------------------
+*
+*  onMyEdit() 
+*             >> round() 
+*                       >> writeMessages() 
+*                                         >> sendMessages()
+*
+*/
+
+function onMyEdit() {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName('Jan');
+    const sheetUrl = ss.getUrl();
+    const cell = sheet.getActiveCell().getA1Notation();
+    //[19-01-04 11:18:47:870 JST] G4
+    const columnNameInAlphabet = cell.replace(/\d+/,'');
+    Logger.log(columnNameInAlphabet);
+    if ('H' == columnNameInAlphabet) {
+        const rowNameInNumber = sheet.getActiveCell().getRow();
+        var RowNumberOfUpdatedStatus = round(rowNameInNumber) - 3;
+        Logger.log(RowNumberOfUpdatedStatus);
+        var editedTask = sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn())
+        .getValues()[RowNumberOfUpdatedStatus];
+        Logger.log(editedTask);
+        /*
+        * No.	: 0
+        * Task Category : 1
+        * Task Name ,Assignee, Slack User ID, Due Date,
+        * Status : 7
+        */
+        //No.
+        var taskNumber = round(editedTask[0]);
+        //Task Category, カテゴリ
+        var taskCategory = editedTask[1]; 
+        //Task Name, タスク名
+        var taskName = editedTask[2];
+        //Slack User ID of Assignee, 担当者のslackのプロフィールページからコピペするUser ID
+        var slackId = editedTask[5]; 
+        //Due Date, 締切
+        var dueDateTime = Moment.moment(editedTask[6]).format('YYYY年MM月DD日  hh時');
+        //Status, done, doing, or todo???
+        var status = editedTask[7];  
+        var contents = writeMessages(taskNumber, taskCategory, taskName, slackId, dueDateTime, status, sheetUrl);
+        sendMessages(contents);
+    }
+}
+
+
+function writeMessages(taskNumber, taskCategory, taskName, slackId, dueDateTime, status, sheetUrl) {
+    var messages = "###Update is complete.  更新完了### \n";
+    messages += "【Assignee】 <@" + slackId + ">\n";
+    messages += "【No.】" + taskNumber +"\n";
+    messages += "【Task Category】" + taskCategory +"\n";
+    messages += "【Task Name】" + taskName +"\n";
+    messages += "【Due Date】" + dueDateTime +"\n";
+    messages += "【Status】" + status +"\n";
+    messages += "【URL】"+ sheetUrl;
+    return messages;
+}
+
+
 
 
 /*
