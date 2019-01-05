@@ -20,7 +20,7 @@ Bot post past-due tasks, and the assignees to slack regularly
 5) Copy and paste your script editor  from all contents of this js-file.
 6) Save and get permissions.
 
-+α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>" \n
++α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>" 
 Write Only at the cell of Slack User ID one by one bellow;
 =VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
 
