@@ -7,11 +7,9 @@ Draft is created regularary, NOT sent to someone.
 
 ### onMyEdit.js
 Bot post contents of updated row to slack, when status is updated,
-https://github.com/gkzz/gas-test/blob/master/onMyEdit.js
 
 ### remind.js
 Bot post past-due tasks, and the assignees to slack regularly
-https://github.com/gkzz/gas-test/blob/master/remind.js
 
 #### To Do Before Run onMyEdit.js and remind.js
 
@@ -22,7 +20,7 @@ https://github.com/gkzz/gas-test/blob/master/remind.js
 5) Copy and paste your script editor  from all contents of this js-file.
 6) Save and get permissions.
 
-+α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>"
++α) How to change automatically <Slack User ID> of the sheet named "<SheetName, e.g. sheet1>" \n
 Write Only at the cell of Slack User ID one by one bellow;
 =VLOOKUP(D2,slackID!$A$2:$B$5,2,FALSE)
 
