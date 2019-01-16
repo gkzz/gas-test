@@ -5,6 +5,9 @@
 ### mailDraft.js
 Draft is created regularary, NOT sent to someone.
 
+### DraftWeeklyRpt
+Weekly draft is created regularary, NOT sent to someone.
+
 ### onMyEdit.js
 Bot post contents of updated row to slack, when status is updated.
 
@@ -14,7 +17,7 @@ Bot post past-due tasks, and the assignees to slack regularly.
 ### taskMng.js
 onMyEdit.js + remind.js
 
-## renameCopiedSheet.js
+### renameCopiedSheet.js
 Sheet name is duplicated and renamed the number of member times.
 
 #### To Do Before Run onMyEdit.js, remind.js, taskMng.js
