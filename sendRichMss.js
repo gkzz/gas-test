@@ -3,6 +3,9 @@ sources;
 A bot to help you read your way through the next 4 years
 https://medium.com/@venetucci/a-bot-to-help-you-read-your-way-through-next-4-years-7ba9d80066fc
 
+Google Apps Scriptコーディングガイドライン【随時更新】
+https://tonari-it.com/gas-coding-guide-line/
+
 Work with JSON
 https://developers.google.com/apps-script/guides/services/external
 
