@@ -36,7 +36,7 @@ Google Form URL
 formUrl
 
 incoming webhook URL
-https://hooks.slack.com/services/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
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 */
@@ -74,7 +74,7 @@ function main() {
    const SHEET_NAME = "sheet1"; //<SheetName>
    const CHANNEL = "general"; //<ChannelName> 
    //const USER_NAME = "Tohru"; //<BotName> 
-   const INCOMING_WEBHOOK_URL = "https://hooks.slack.com/services/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"; //<Incoming Webhook URL>
+   const INCOMING_WEBHOOK_URL = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; //<Incoming Webhook URL>
    const FORM_URL = "formUrl"; //<Google Form URL>
    const STATUS = "Done";
    //const PTN = /.*@example.com/ //<regex>
