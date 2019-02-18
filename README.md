@@ -20,6 +20,13 @@ onMyEdit.js + remind.js
 ### renameCopiedSheet.js
 Sheet name is duplicated and renamed the number of member times.
 
+### momentToday.js
+This is my custom function to write date of today and convert it to "YYYY年MM月DD日 (ddd)".
+
+### sendRichMss.js
+Get Data from Spreadsheet, and post it with attachment to Slack.
+csv/sendRichMss.csv is a sample dataset.
+
 #### To Do Before Run onMyEdit.js, remind.js, taskMng.js
 
 1) Create spreadsheet and to 2 sheets.
