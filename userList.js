@@ -66,7 +66,10 @@ function main() {
   for ( var rowNumber = 0; rowNumber < EMAIL_ADDRESS_ARRAY.length; rowNumber++ ){
       setValues(EMAIL_ADDRESS_ARRAY, rowNumber, COLUMN_NUMBER_EMAIL_ADDRESS, SHEET_NAME);
   } 
-  
+  var momentToday = getMomentToday();
+  SHEET.getRange(2, 7).setValue(momentToday);
+  var valueRangeLength = getValueRangeLength(SHEET);
+  SHEET.getRange(2,8).setValue(valueRangeLength);
 }
 
 // Get All Slack Usernames & Emailaddresses
@@ -94,4 +97,34 @@ function setValues(array, rowNumber, COLUMN_NUMBER, SHEET_NAME){
   Logger.log(value);
   //return;
   SHEET.getRange(rowNumber+2, COLUMN_NUMBER).setValue(value);
+}
+
+function getMomentToday() {
+    //const sheet = SS.getSheetByName('<SheetName e.g. sheet1>');
+  
+    // Register lang:ja
+    Moment.moment.lang(
+      'ja', {
+        weekdays: ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],
+        weekdaysShort: ["日","月","火","水","木","金","土"],
+      }
+    );
+    var nowDate = Moment.moment().format('YYYY年MM月DD日 (ddd)');
+    return nowDate;
+}
+
+
+function getValueRangeLength(SHEET) {
+    const OFFSET_ROW = 1;
+    const OFFSET_COLUMN = 0;
+    //var LastRowOfA = getLastRowInColumn(SHEET, 1);
+    //var LastColumn = ss.getLastColumn();
+    //var ValueRange = SHEET.getDataRange(top, left, LastRowOfA - top, LastColumn -left).getValues();
+    //var dataRange = SHEET.getDataRange();
+    var valueRangeLength = SHEET.getDataRange()
+        .offset(OFFSET_ROW, OFFSET_COLUMN)
+        .getValues()
+        .length;  
+    Logger.log(valueRangeLength);
+    return valueRangeLength;
 }
