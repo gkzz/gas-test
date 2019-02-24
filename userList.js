@@ -45,6 +45,12 @@ function main() {
   const COLUMN_NUMBER_EMAIL_ADDRESS = 2;
   /*----------------------------------------------------------------------------------------------*/
   
+  /*--------InitialSetUp--------------------------------------------------------------------------*/
+  const SS = SpreadsheetApp.getActiveSpreadsheet();
+  const SHEET = SS.getSheetByName(SHEET_NAME);
+  /*----------------------------------------------------------------------------------------------*/
+
+
   // Get All Slack Usernames & Emailaddresses
   var listjson = getListjson(SLACK_TEAM, SLACK_TOKEN);
   
@@ -61,10 +67,10 @@ function main() {
   //Logger.log(REAL_NAME_ARRAY.length);
   //Logger.log(EMAIL_ADDRESS_ARRAY.length);
   for ( var rowNumber = 0; rowNumber < REAL_NAME_ARRAY.length; rowNumber++ ){
-       setValues(REAL_NAME_ARRAY, rowNumber, COLUMN_NUMBER_REAL_NAME, SHEET_NAME);
+       setValues(REAL_NAME_ARRAY, rowNumber, COLUMN_NUMBER_REAL_NAME, SHEET);
   } 
   for ( var rowNumber = 0; rowNumber < EMAIL_ADDRESS_ARRAY.length; rowNumber++ ){
-      setValues(EMAIL_ADDRESS_ARRAY, rowNumber, COLUMN_NUMBER_EMAIL_ADDRESS, SHEET_NAME);
+      setValues(EMAIL_ADDRESS_ARRAY, rowNumber, COLUMN_NUMBER_EMAIL_ADDRESS, SHEET);
   } 
   var momentToday = getMomentToday();
   SHEET.getRange(2, 7).setValue(momentToday);
@@ -90,9 +96,7 @@ function getValue(member, value) {
     }
 }
 
-function setValues(array, rowNumber, COLUMN_NUMBER, SHEET_NAME){
-  const SS = SpreadsheetApp.getActiveSpreadsheet();
-  const SHEET = SS.getSheetByName(SHEET_NAME);
+function setValues(array, rowNumber, COLUMN_NUMBER, SHEET){
   var value = array[rowNumber];
   Logger.log(value);
   //return;
