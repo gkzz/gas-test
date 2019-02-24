@@ -28,6 +28,10 @@ OAuth Access Token is what start with "xoxp-".
 https://api.slack.com/apps/<aaaaaaaaaaaaa>/oauth?
 
 
+■Where is sample output??
+csv/userList_master.csv
+Needless to say, output format is "not csv, but SpreadSheet"!
+
 */
 
 function main() {
