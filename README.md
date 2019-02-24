@@ -27,6 +27,10 @@ This is my custom function to write date of today and convert it to "YYYYå¹´MMæœ
 Get Data from Spreadsheet, and post it with attachment to Slack.
 csv/sendRichMss.csv is a sample dataset.
 
+### userList.js
+Get usernames and email addresses of slack users
+Sample output is csv/userList_master.csv
+
 #### To Do Before Run onMyEdit.js, remind.js, taskMng.js
 
 1) Create spreadsheet and to 2 sheets.
