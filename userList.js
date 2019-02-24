@@ -32,6 +32,13 @@ https://api.slack.com/apps/<aaaaaaaaaaaaa>/oauth?
 csv/userList_master.csv
 Needless to say, output format is "not csv, but SpreadSheet"!
 
+*---------Register library of moment.js----------------------
+library key;
+moment.js
+MHMchiX6c1bwSqGM1PZiW_PxhMjh3Sh48
+moment.js
+https://tonari-it.com/gas-moment-js-moment/
+
 */
 
 function main() {
