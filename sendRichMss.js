@@ -117,7 +117,7 @@ function main() {
           //6: Quote
           var quote = getQuote(value);
           // If you can get data of the each row, you put "Done" at the cell(i+2, 27).
-          SHEET.getRange(i+2, 17).setValue("Done");
+          SHEET.getRange(i+2, 17).setValue(STATUS);
           if ( writeConts == 1 ) {
             //*---------------Headers--------------------------*
             var headers = getHeaders();
@@ -151,7 +151,7 @@ function getValueRange(SHEET) {
     //var ValueRange = SHEET.getDataRange(top, left, LastRowOfA - top, LastColumn -left).getValues();
     //var dataRange = SHEET.getDataRange();
     var valueRange = SHEET.getDataRange()
-        .dataRange.offset(OFFSET_ROW, OFFSET_COLUMN)
+        .offset(OFFSET_ROW, OFFSET_COLUMN)
         .getValues();  
     //Logger.log( ValueRange.length); //92
     return valueRange;
