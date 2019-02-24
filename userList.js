@@ -7,7 +7,7 @@ http://blog.songs-inside.com/entry/gas-slack
 *---------Select Permission Scopes----------------------
 View email addresses of people on this workspace
 users:read.email
-https://api.slack.com/apps/AF6LX41D3/oauth?
+https://api.slack.com/apps/<aaaaaaaaaaaaa>/oauth?
 
 ■Your Apps
 At First, Click "Your Apps"
@@ -20,12 +20,12 @@ Next, Select bellow step by step,
 (2)Add features and functionality
 (3)Permissions
 
-https://api.slack.com/apps/AF6LX41D3
+https://api.slack.com/apps/<aaaaaaaaaaaaa>
 
 ■OAuth & Permissions
 Finally, Copy and paste value of "OAuth Access Token" your script.
 OAuth Access Token is what start with "xoxp-".
-https://api.slack.com/apps/AF6LX41D3/oauth?
+https://api.slack.com/apps/<aaaaaaaaaaaaa>/oauth?
 
 
 */
