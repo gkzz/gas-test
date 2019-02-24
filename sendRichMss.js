@@ -131,7 +131,7 @@ function main() {
           var att = getAttText(quote, assignor);
           var richMessage = writeRichMessage(CHANNEL, assignees, att);
           sendMessage(richMessage, INCOMING_WEBHOOK_URL);
-          writeConts ++
+          writeConts ++;
         }
     }
     if ( writeConts > 1 ) {
