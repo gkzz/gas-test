@@ -40,8 +40,6 @@ formUrl
 
 incoming webhook URL
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
 */
 
 
@@ -51,39 +49,43 @@ function main() {
     <Headers>
     | <Assignee #1>      <- with Title's Attachement
     | <Quote #1>     <- with Text's Att
-    | <Assignor #1>      <- with Text's Att
-    
+    | <Assignor #1>      <- with Text's Att    
     | <Assignee #2>     
     | <Quote #2>     
     | <Assignor #2>   
-    
     | <Assignee #3>     
     | <Quote #3>     
     | <Assignor #3>   
     <Fotters>
     */
-   
-   //*---------------Fixed value--------------------------*
-   /*
-   const SHEETNAME = "<SheetName>"; //<SheetName>
-   const CHANNEL = "<ChannelName>"; //<ChannelName> 
-   const USERNAME = "<BotName>"; //<BotName> 
-   const INCOMING_WEBHOOK_URL = "<Incoming Webhook URL>"; //<Incoming Webhook URL>
-   const FORM_URL = "formUrl"; //<Google Form URL>
-   const STATUS = "something";
-   const PTN = /<regex e.g. .*@example.com>/ //<regex>
-   */
-   
-   const SHEET_NAME = "sheet1"; //<SheetName>
-   const CHANNEL = "general"; //<ChannelName> 
-   //const USER_NAME = "Tohru"; //<BotName> 
-   const INCOMING_WEBHOOK_URL = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; //<Incoming Webhook URL>
-   const FORM_URL = "formUrl"; //<Google Form URL>
-   const STATUS = "Done";
-   //const PTN = /.*@example.com/ //<regex>
     
+    //*---------------Args--------------------------*
+    /*
+    const SHEETNAME = "<SheetName>"; //<SheetName>
+    const CHANNEL = "<ChannelName>"; //<ChannelName> 
+    const USERNAME = "<BotName>"; //<BotName> 
+    const INCOMING_WEBHOOK_URL = "<Incoming Webhook URL>"; //<Incoming Webhook URL>
+    const FORM_URL = "formUrl"; //<Google Form URL>
+    const STATUS = "something";
+    const PTN = /<regex e.g. .*@example.com>/ //<regex>
+    */
     
-    //*---------------writer, players, goodWork-----------------------*
+    const SHEET_NAME = "sheet1"; //<SheetName>
+    const CHANNEL = "general"; //<ChannelName> 
+    //const USER_NAME = "Tohru"; //<BotName> 
+    const INCOMING_WEBHOOK_URL = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; //<Incoming Webhook URL>
+    const FORM_URL = "formUrl"; //<Google Form URL>
+    const STATUS = "Done";
+    //const PTN = /.*@example.com/ //<regex>
+
+    //Emergency Contact
+    const TO_EMERGENCY_CONTACT_ARRAY = [
+        'sekiguchi@ap-com.co.jp ',
+        'g_tamaki@ap-com.co.jp', 
+    ];
+        
+        
+    //*---------------Initical SetUp-----------------------*
     const SS = SpreadsheetApp.getActiveSpreadsheet();
     //const SHEET = SS.getSheetByName('<SheetName e.g. sheet1>');
     const SHEET = SS.getSheetByName(SHEET_NAME);
@@ -91,12 +93,11 @@ function main() {
     // Get data
     const VALUE_RANGE = getValueRange(SHEET);
 
-    
+        
 
     //Get data by 5 times
     var writeConts = 1;
-    for ( var i = 0; i < VALUE_RANGE.length; i++ ) {
-        
+    for ( var i = 0; i < VALUE_RANGE.length; i++ ) {       
         /*
         if ( writeConts >= 6 ) {
             break;
@@ -106,42 +107,47 @@ function main() {
         var value = VALUE_RANGE[i];
         //Logger.log(value);
         //return;
-        
+            
         //if ( !isSkipFlag(value, STATUS, PTN) {}
         if ( !isSkipFlag(value, STATUS) ) {
-          //1: mailAddress	//2: Assignor	//3: Assignor's Department
-          var assignor = getAssignor(value);
-          //4: Assignee1  //5: Assignee1's Department
-          var assignees = getAssignees(value);
-          
-          //6: Quote
-          var quote = getQuote(value);
-          // If you can get data of the each row, you put "Done" at the cell(i+2, 27).
-          SHEET.getRange(i+2, 17).setValue(STATUS);
-          if ( writeConts == 1 ) {
-            //*---------------Headers--------------------------*
-            var headers = getHeaders();
-            headers = writeMessage(CHANNEL, headers);
-            sendMessage(headers, INCOMING_WEBHOOK_URL);
-          }
-          
-          //*---------------Attachments--------------------------*
-          //var richMessage = writeRichMessage(channel, writers, players, goodJob);
-          
-          var att = getAttText(quote, assignor);
-          var richMessage = writeRichMessage(CHANNEL, assignees, att);
-          sendMessage(richMessage, INCOMING_WEBHOOK_URL);
-          writeConts ++;
+            //1: mailAddress	//2: Assignor	//3: Assignor's Department
+            var assignor = getAssignor(value);
+            //4: Assignee1  //5: Assignee1's Department
+            var assignees = getAssignees(value);
+            
+            //6: Quote
+            var quote = getQuote(value);
+            // If you can get data of the each row, you put "Done" at the cell(i+2, 27).
+            SHEET.getRange(i+2, 17).setValue(STATUS);
+            if ( writeConts == 1 ) {
+                //*---------------Headers--------------------------*
+                var headers = getHeaders();
+                headers = writeMessage(CHANNEL, headers);
+                sendMessage(headers, INCOMING_WEBHOOK_URL);
+            }
+            
+            //*---------------Attachments--------------------------*
+            //var richMessage = writeRichMessage(channel, writers, players, goodJob);
+            
+            var att = getAttText(quote, assignor);
+            var richMessage = writeRichMessage(CHANNEL, assignees, att);
+            sendMessage(richMessage, INCOMING_WEBHOOK_URL);
+            writeConts ++;
         }
     }
+    
     if ( writeConts > 1 ) {
-         //*---------------Fotters--------------------------*
+        //*---------------Fotters--------------------------*
         var fotters = getFotters(SS, FORM_URL);
         fotters = writeMessage(CHANNEL, fotters);
         sendMessage(fotters, INCOMING_WEBHOOK_URL);
-    }
+        return;
+    } else {
+        sendAlertNoPostsInGmail(TO_EMERGENCY_CONTACT_ARRAY, SS, FORM_URL, SLACK_URL);
+        return;
+    }    
 }
-  
+    
 
 function getValueRange(SHEET) {
     const OFFSET_ROW = 1;
@@ -237,7 +243,7 @@ function getQuote(value) {
 
 
 function getHeaders() {
-     // lang:jaを登録。これ以降はlangを指定しなくても自動的にjaが使用される。
+     // Register lang:ja
      Moment.moment.lang(
         'ja', {
             weekdays: ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],
@@ -331,4 +337,39 @@ function sendMessage(payload, INCOMING_WEBHOOK_URL){
   };
 
   return UrlFetchApp.fetch(INCOMING_WEBHOOK_URL,options);
+}
+
+function sendAlertNoPostsInGmail(TO_EMERGENCY_CONTACT_ARRAY, SS, FORM_URL, SLACK_URL) {
+    const SHEET_URL = SS.getUrl();
+    const SUBJECT = '【' + momentYesterday() + ' Nothing To Report】';
+    var message = 'Yesterday (' + momentYesterday() + ') , there are nothing to report.\n\n'
+    message += '【Date To Post】' + momentToday() + '\n';
+    message += FORM_URL + '\n\n';
+    message += '【Archive】\n' + SHEET_URL + '\n\n';
+    message += '【slack #<CHANNEL_NAME>】\n' + SLACK_URL + '\n\n';
+    GmailApp.sendEmail(TO_EMERGENCY_CONTACT_ARRAY, SUBJECT, message);
+}
+
+function momentToday() {
+    // Register lang:ja
+    Moment.moment.lang(
+       'ja', {
+           weekdays: ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],
+           weekdaysShort: ["日","月","火","水","木","金","土"],
+        }
+    );
+    var todayDateTime = Moment.moment().format('YYYY年M月D日(ddd) HH時mm分');
+    return todayDateTime;
+}
+
+function momentYesterday() {
+    // Register lang:ja
+    Moment.moment.lang(
+       'ja', {
+           weekdays: ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],
+           weekdaysShort: ["日","月","火","水","木","金","土"],
+        }
+    );
+    var yesterdayDate = Moment.moment().add(-1, 'days').format('YYYY年M月D日(ddd)');
+    return yesterdayDate;
 }
