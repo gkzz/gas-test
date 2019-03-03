@@ -85,7 +85,17 @@ function main() {
   SHEET.getRange(2,8).setValue(valueRangeLength);
 }
 
-// Get All Slack Usernames & Emailaddresses
+
+/**
+* getListjson Function
+*
+* Get All Slack Usernames & Emailaddresses
+*
+* properties in the objects/rows
+* @param {string} SLACK_TEAM
+* @param {string} SLACK_TOKEN 
+* @return {string} listjson
+*/
 function getListjson(SLACK_TEAM, SLACK_TOKEN) { 
   var listurl = 'https://' + SLACK_TEAM + '.slack.com/api/users.list?token=' + SLACK_TOKEN;
   var listres = UrlFetchApp.fetch(listurl);
@@ -95,6 +105,17 @@ function getListjson(SLACK_TEAM, SLACK_TOKEN) {
 } 
 
 
+
+/**
+* getValue Function
+*
+* Get From "listjson" Data     
+*
+* properties in the objects/rows
+* @param {string} member
+* @param {string} value 
+* @return {string} member["profile"][value] - Names Of All Users That Are Registered Under Your Workspace
+*/
 function getValue(member, value) {
   if ( !member["profile"][value] ) {
       return "not found";
@@ -103,12 +124,24 @@ function getValue(member, value) {
     }
 }
 
+
+/**
+* setValues Function
+*
+* Set A Value line by line To Your SpreadSheet     
+*
+* properties in the objects/rows
+* @param {string} member
+* @param {string} value 
+* @return {string} member["profile"][value] - Names Of All Users That Are Registered Under Your Workspace
+*/
 function setValues(array, rowNumber, COLUMN_NUMBER, SHEET){
   var value = array[rowNumber];
   Logger.log(value);
   //return;
   SHEET.getRange(rowNumber+2, COLUMN_NUMBER).setValue(value);
 }
+
 
 function getMomentToday() {
     //const sheet = SS.getSheetByName('<SheetName e.g. sheet1>');
