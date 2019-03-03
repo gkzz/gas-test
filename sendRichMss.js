@@ -80,8 +80,8 @@ function main() {
 
     //Emergency Contact
     const TO_EMERGENCY_CONTACT_ARRAY = [
-        'sekiguchi@ap-com.co.jp ',
-        'g_tamaki@ap-com.co.jp', 
+        'sample1@ssample.com',
+        'sample2@ssample.com', 
     ];
         
         
