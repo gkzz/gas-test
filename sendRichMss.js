@@ -74,7 +74,6 @@ function main() {
     const CHANNEL = "general"; //<ChannelName> 
     //const USER_NAME = "Tohru"; //<BotName> 
     const INCOMING_WEBHOOK_URL = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; //<Incoming Webhook URL>
-    const FORM_URL = "formUrl"; //<Google Form URL>
     const STATUS = "Done";
     //const PTN = /.*@example.com/ //<regex>
 
@@ -85,7 +84,7 @@ function main() {
     ];
         
         
-    //*---------------Initical SetUp-----------------------*
+    //*---------------Initial SetUp-----------------------*
     const SS = SpreadsheetApp.getActiveSpreadsheet();
     //const SHEET = SS.getSheetByName('<SheetName e.g. sheet1>');
     const SHEET = SS.getSheetByName(SHEET_NAME);
@@ -150,16 +149,14 @@ function main() {
     
 
 function getValueRange(SHEET) {
+    //If you would like to get 1st column...
+    //const OFFSET_ROW = 0;
     const OFFSET_ROW = 1;
     const OFFSET_COLUMN = 0;
-    //var LastRowOfA = getLastRowInColumn(SHEET, 1);
-    //var LastColumn = ss.getLastColumn();
-    //var ValueRange = SHEET.getDataRange(top, left, LastRowOfA - top, LastColumn -left).getValues();
-    //var dataRange = SHEET.getDataRange();
     var valueRange = SHEET.getDataRange()
         .offset(OFFSET_ROW, OFFSET_COLUMN)
         .getValues();  
-    //Logger.log( ValueRange.length); //92
+    //Logger.log('ValueRange.length: %s', ValueRange.length); //Length Of Columns
     return valueRange;
 }
 
@@ -305,30 +302,6 @@ function writeRichMessage(CHANNEL, assignees, att) {
   return payload;
 }
 
-
-/*
-function writeRichMessage(CHANNEL, assignor, assignees, quote) {
-  var payload = {
-    "channel": "#" + CHANNEL,
-    "attachments":[
-       {
-          "fallback": "This is an update from a Slackbot integrated into your organization. Your client chose not to show the attachment.",
-          "pretext": assignor,
-          "mrkdwn_in": ["pretext"],
-          "color": "#76E9CD",
-          "fields":[
-             {
-                "title": assignees,
-                "value": quote,
-                "short":false
-             },
-          ]
-       }
-    ]
-  };
-  return payload;
-}
-*/
 
 function sendMessage(payload, INCOMING_WEBHOOK_URL){
   var options = {
